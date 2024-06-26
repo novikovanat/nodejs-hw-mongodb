@@ -8,7 +8,7 @@ import { getAllStudents, getStudentById } from './services/students.js';
 dotenv.config();
 const PORT = Number(env('PORT'));
 
-export const startServer = () => {
+export const setupServer = () => {
   const app = express();
   app.use(
     pino({
@@ -21,11 +21,6 @@ export const startServer = () => {
   app.use(express.json());
   app.use(cors());
 
-  app.get('/', (req, res) => {
-    res.json({
-      message: 'Hello world!',
-    });
-  });
 
   app.get('/students', async (req, res) => {
     const students = await getAllStudents();
