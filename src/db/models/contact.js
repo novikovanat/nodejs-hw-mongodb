@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import {model, Schema } from 'mongoose';
 import { emailRegex } from '../../constants/contact-constants.js';
 
 function validator(email) {
