@@ -1,11 +1,11 @@
-import { StudentsCollection } from '../db/models/student.js';
+import { ContactsCollection } from '../db/models/student.js';
 
 export const getAllStudents = async () => {
-  const students = await StudentsCollection.find();
+  const students = await ContactsCollection.find();
   return students;
 };
 
 export const getStudentById = async (studentId) => {
-  const student = await StudentsCollection.findById(studentId);
+  const student = await ContactsCollection.findById(studentId);
   return student;
 };

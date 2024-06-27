@@ -1,25 +1,32 @@
 import { model, Schema } from 'mongoose';
+import { emailRegex } from '../../constants/contact-constants.js';
 
-const studentsSchema = new Schema(
+function validator(email) {
+  return emailRegex.test(email);
+}
+
+const contactsSchema = new Schema(
   {
     name: {
       type: String,
       required: true,
     },
-    age: {
-      type: Number,
-      required: true,
-    },
-    gender: {
+    phoneNumber: {
       type: String,
       required: true,
-      enum: ['male', 'female', 'other'],
     },
-    avgMark: {
-      type: Number,
+    email: {
+      type: String,
+      validate: validator,
+      required: false,
+    },
+    contactType: {
+      type: String,
       required: true,
+      enum: ['work', 'home', 'personal'],
+      default: 'personal',
     },
-    onDuty: {
+    isFavourite: {
       type: Boolean,
       required: true,
       default: false,
@@ -31,4 +38,4 @@ const studentsSchema = new Schema(
   },
 );
 
-export const StudentsCollection = model('students', studentsSchema);
+export const ContactsCollection = model('contacts', contactsSchema);
