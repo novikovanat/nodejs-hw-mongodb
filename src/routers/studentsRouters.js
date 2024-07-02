@@ -5,9 +5,11 @@ import {
   getStudentByIdController,
 } from '../controllers/studentsControllers.js';
 
+import controllerWrapper from '../utils/controllerWrapper.js';
+
 const router = Router();
 
-router.get('/', getStudentsController);
-router.get('/:studentId', getStudentByIdController);
+router.get('/', controllerWrapper(getStudentsController));
+router.get('/:studentId', controllerWrapper(getStudentByIdController));
 
 export default router;
