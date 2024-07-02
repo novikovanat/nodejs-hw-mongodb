@@ -16,14 +16,14 @@ export const getStudentByIdController = async (req, res, next) => {
 
   // Відповідь, якщо контакт не знайдено
   if (!student) {
-    res.status(404).json({
-      message: 'Student not found',
-    });
+    next(new Error('Student not found'));
     return;
   }
 
   // Відповідь, якщо контакт знайдено
   res.status(200).json({
+    status: 200,
     data: student,
+    message: `Successfully found student with id ${studentId}!`,
   });
 };
