@@ -1,16 +1,16 @@
-import express from 'express';
 import { getAllStudents, getStudentById } from '../services/students.js';
-const router = express.Router();
 
-router.get('/', async (req, res) => {
+export const getStudentsController = async (req, res) => {
   const students = await getAllStudents();
 
-  res.status(200).json({
+  res.json({
+    status: 200,
+    message: 'Successfully found students!',
     data: students,
   });
-});
+};
 
-router.get('/:studentId', async (req, res, next) => {
+export const getStudentByIdController = async (req, res, next) => {
   const { studentId } = req.params;
   const student = await getStudentById(studentId);
 
@@ -26,6 +26,4 @@ router.get('/:studentId', async (req, res, next) => {
   res.status(200).json({
     data: student,
   });
-});
-
-export default router;
+};

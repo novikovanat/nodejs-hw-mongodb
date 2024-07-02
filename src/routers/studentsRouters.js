@@ -7,7 +7,7 @@ import {
 
 const router = Router();
 
-router.get('/students', getStudentsController);
-router.get('/students/:studentId', getStudentByIdController);
+router.get('/', getStudentsController);
+router.get('/:studentId', getStudentByIdController);
 
 export default router;

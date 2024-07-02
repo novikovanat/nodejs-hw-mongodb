@@ -3,7 +3,8 @@ import pino from 'pino-http';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { env } from './utils/env.js';
-import router from './routers/students.js'; //
+import router  from './routers/studentsRouters.js';
+import { notFoundHandler, serverErrorHandler } from './middleware/errorHandlers.js';
 
 dotenv.config();
 const PORT = Number(env('PORT'));
@@ -29,18 +30,12 @@ export const startServer = () => {
 
   app.use('/students', router); // Додаємо роутер до app як middleware
 
-  app.use('*', (req, res, next) => {
-    res.status(404).json({
-      message: 'Not found',
-    });
-  });
+  app.use('*', notFoundHandler);
 
-  app.use((err, req, res, next) => {
-    res.status(500).json({
-      message: 'Something went wrong',
-      error: err.message,
-    });
-  });
+  app.use(serverErrorHandler);
+
+ 
+  
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
