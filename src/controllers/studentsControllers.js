@@ -1,4 +1,5 @@
 import { getAllStudents, getStudentById } from '../services/students.js';
+import createHttpError from 'http-errors';
 
 export const getStudentsController = async (req, res) => {
   const students = await getAllStudents();
@@ -16,7 +17,8 @@ export const getStudentByIdController = async (req, res, next) => {
 
   // Відповідь, якщо контакт не знайдено
   if (!student) {
-    next(new Error('Student not found'));
+    // 2. Створюємо та налаштовуємо помилку
+    next(createHttpError(404, 'Student not found'));
     return;
   }
 
