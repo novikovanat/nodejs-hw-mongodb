@@ -5,6 +5,7 @@ import {
   getStudentByIdController,
   createStudentController,
   deleteStudentController,
+  upsertStudentController,
 } from '../controllers/studentsControllers.js';
 
 import controllerWrapper from '../utils/controllerWrapper.js';
@@ -15,5 +16,6 @@ router.get('/', controllerWrapper(getStudentsController));
 router.get('/:studentId', controllerWrapper(getStudentByIdController));
 router.post('/', controllerWrapper(createStudentController));
 router.delete('/:studentId', controllerWrapper(deleteStudentController));
+router.put('/:studentId', controllerWrapper(upsertStudentController));
 
 export default router;
