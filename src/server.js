@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { env } from './utils/env.js';
 import { router } from './routers/contactsRouters.js';
+import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
 const PORT = Number(env('PORT'));
@@ -23,20 +24,9 @@ export const setupServer = () => {
   app.use('/contacts', router);
 
 
-  app.use('*', (req, res, next) => {
-    res.status(404).json({
-      status: 404,
-      message: 'Page not found',
-    });
-  });
+  app.use('*', notFoundHandler );
 
-  app.use((err, req, res, next) => {
-    res.status(500).json({
-      status: 500,
-      message: 'Something went wrong',
-      error: err.message,
-    });
-  });
+  app.use(errorHandler);
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
