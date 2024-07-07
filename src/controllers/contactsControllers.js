@@ -12,7 +12,7 @@ export const getAllContactsController = async (req, res) => {
 
   res.status(200).json({
     status: 200,
-    data: contacts,
+    contacts,
     message: 'Successfully found contacts!',
   });
 };
@@ -30,18 +30,17 @@ export const getContactByIdController = async (req, res, next) => {
   // Відповідь, якщо контакт знайдено
   res.status(200).json({
     status: 200,
-    data: contact,
+    contact,
     message: `Successfully found contact with id ${contactId}!`,
   });
 };
 
 export const createContactController = async (req, res) => {
-  const contact = createContact(req.body);
-
+  const data = await createContact(req.body);
   res.status(201).json({
     status: 201,
     message: 'Successfully created a contact!',
-    data: contact,
+    data,
   });
 };
 
@@ -60,7 +59,7 @@ export const updateContactController = async (req, res, next) => {
   res.status(status).json({
     status,
     message: "Successfully patched a contact!",
-    data: result.contact,
+    result,
   });
 };
 
