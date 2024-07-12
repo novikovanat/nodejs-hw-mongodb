@@ -1,11 +1,29 @@
 import { StudentsCollection } from '../db/models/student.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 
-export const getAllStudents = async ({ page, perPage, sortOrder, sortBy }) => {
+export const getAllStudents = async ({ page, perPage, sortOrder, sortBy,  filter = {minAge:null} }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
+  console.log( ` gender_${filter.gender}_and_age_${filter.minAge}_!`);
 
   const studentsQuery = StudentsCollection.find();
+
+  if (filter.gender) {
+    studentsQuery.where('gender').equals(filter.gender);
+  }
+  if (filter.maxAge) {
+    studentsQuery.where('age').lte(filter.maxAge);
+  }
+  if (filter.minAge) {
+    studentsQuery.where('age').gte(filter.minAge);
+  }
+  if (filter.maxAvgMark) {
+    studentsQuery.where('avgMark').lte(filter.maxAvgMark);
+  }
+  if (filter.minAvgMark) {
+    studentsQuery.where('avgMark').gte(filter.minAvgMark);
+  }
+
   const studentsCount = await StudentsCollection.find()
     .merge(studentsQuery)
     .countDocuments();
