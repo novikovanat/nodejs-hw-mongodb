@@ -1,10 +1,11 @@
 import { StudentsCollection } from '../db/models/student.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 
-export const getAllStudents = async ({ page, perPage, sortOrder, sortBy,  filter = {minAge:null} }) => {
+export const getAllStudents = async ({ page, perPage, sortOrder, sortBy,  filter}) => {
+  const {gender ='', minAge=''} = filter;
   const limit = perPage;
   const skip = (page - 1) * perPage;
-  console.log( ` gender_${filter.gender}_and_age_${filter.minAge}_!`);
+  console.log( ` gender_${gender}_and_age_${minAge}_!`);
 
   const studentsQuery = StudentsCollection.find();
 
