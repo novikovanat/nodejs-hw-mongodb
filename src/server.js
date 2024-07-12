@@ -3,13 +3,13 @@ import pino from 'pino-http';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { env } from './utils/env.js';
-import router  from './routers/studentsRouters.js';
-import { notFoundHandler, serverErrorHandler } from './middleware/errorHandlers.js';
+import { router } from './routers/contactsRouters.js';
+import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
 const PORT = Number(env('PORT'));
 
-export const startServer = () => {
+export const setupServer = () => {
   const app = express();
   app.use(
     pino({
@@ -21,21 +21,12 @@ export const startServer = () => {
 
   app.use(express.json());
   app.use(cors());
+  app.use('/contacts', router);
 
-  app.get('/', (req, res) => {
-    res.json({
-      message: 'Hello world!',
-    });
-  });
 
-  app.use('/students', router); // Додаємо роутер до app як middleware
+  app.use('*', notFoundHandler );
 
-  app.use('*', notFoundHandler);
-
-  app.use(serverErrorHandler);
-
- 
-  
+  app.use(errorHandler);
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
