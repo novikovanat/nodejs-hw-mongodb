@@ -4,7 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { env } from './utils/env.js';
 import { router } from './routers/contactsRouters.js';
-import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
+import { serverErrorHandler, notFoundHandler } from './middleware/errorHandlers.js';
 
 dotenv.config();
 const PORT = Number(env('PORT'));
@@ -26,7 +26,7 @@ export const setupServer = () => {
 
   app.use('*', notFoundHandler );
 
-  app.use(errorHandler);
+  app.use(serverErrorHandler);
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
