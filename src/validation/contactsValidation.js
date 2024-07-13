@@ -3,7 +3,7 @@ import {
   CONTACTS_TYPE,
   DEFAULT_CONTACTS_TYPE,
   phoneNumberRegex,
-} from '../constants/contact-constants.js';
+} from '../constants/contactConstants.js';
 
 export const createContactSchema = Joi.object({
   name: Joi.string().min(3).max(30).required(),

@@ -1,6 +1,6 @@
 // src/utils/parseFilterParams.js
 
-import { CONTACTS_TYPE } from '../constants/contact-constants.js';
+import { CONTACTS_TYPE } from '../constants/contactConstants.js';
 import { parsedOrFirst } from './parsedOrFirst.js';
 
 const parseType = (type) => {

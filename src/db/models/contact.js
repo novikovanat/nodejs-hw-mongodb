@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 import {
   CONTACTS_TYPE,
   emailRegex,
-} from '../../constants/contact-constants.js';
+} from '../../constants/contactConstants.js';
 
 function validator(email) {
   return emailRegex.test(email);

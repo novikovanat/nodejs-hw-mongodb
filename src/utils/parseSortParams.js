@@ -1,7 +1,7 @@
 import {
   KEYS_OF_COLLECTION,
   SORT_ORDER_ARRAY,
-} from '../constants/studentConstants.js';
+} from '../constants/contactConstants.js';
 import { parsedOrFirst } from './parsedOrFirst.js';
 
 export const parseSortParams = ({ sortOrder, sortBy }) => {
