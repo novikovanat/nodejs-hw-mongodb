@@ -1,5 +1,8 @@
-import {model, Schema } from 'mongoose';
-import { emailRegex } from '../../constants/contact-constants.js';
+import { model, Schema } from 'mongoose';
+import {
+  CONTACTS_TYPE,
+  emailRegex,
+} from '../../constants/contact-constants.js';
 
 function validator(email) {
   return emailRegex.test(email);
@@ -16,14 +19,14 @@ const contactsSchema = new Schema(
       required: true,
     },
     email: {
-      type: String,
+      type: String || null,
       validate: validator,
       required: false,
     },
     contactType: {
       type: String,
       required: true,
-      enum: ['work', 'home', 'personal'],
+      enum: CONTACTS_TYPE,
       default: 'personal',
     },
     isFavourite: {

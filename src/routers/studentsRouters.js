@@ -12,9 +12,9 @@ import {
 import controllerWrapper from '../utils/controllerWrapper.js';
 import { validateBody } from '../middleware/validateBody.js';
 import {
-  createStudentSchema,
+  createContactSchema,
   updateStudentSchema,
-} from '../validation/studentsValidation.js';
+} from '../validation/contactsValidation.js';
 import { isValidId } from '../middleware/IsValidId.js';
 
 const router = Router();
@@ -27,7 +27,7 @@ router.get(
 );
 router.post(
   '/',
-  validateBody(createStudentSchema),
+  validateBody(createContactSchema),
   controllerWrapper(createStudentController),
 );
 router.delete('/:studentId', controllerWrapper(deleteStudentController));
