@@ -16,9 +16,11 @@ import {
   updateStudentSchema,
 } from '../validation/studentsValidation.js';
 import { isValidId } from '../middleware/IsValidId.js';
+import { authenticate } from '../services/authenticate.js';
 
 const StudentsRouter = Router();
 
+StudentsRouter.use(authenticate);
 StudentsRouter.get('/', controllerWrapper(getStudentsController));
 StudentsRouter.get(
   '/:studentId',
