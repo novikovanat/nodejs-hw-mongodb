@@ -3,7 +3,7 @@ import pino from 'pino-http';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { env } from './utils/env.js';
-import router  from './routers/studentsRouters.js';
+import router  from './routers/index.js';
 import { notFoundHandler, serverErrorHandler } from './middleware/errorHandlers.js';
 
 dotenv.config();
@@ -28,7 +28,7 @@ export const startServer = () => {
     });
   });
 
-  app.use('/students', router); // Додаємо роутер до app як middleware
+  app.use('/', router); // Додаємо роутер до app як middleware
 
   app.use('*', notFoundHandler);
 

@@ -18,3 +18,4 @@ const usersSchema = new Schema(
 );
 
 export const usersCollection = model('users', usersSchema);
+
