@@ -7,12 +7,14 @@ export const checkRoles =
   (...roles) =>
   async (req, res, next) => {
     const { user } = req;
+
     if (!user) {
       next(createHttpError(401));
       return;
     }
 
     const { role } = user;
+
     if (roles.includes(ROLES.TEACHER) && role === ROLES.TEACHER) {
       next();
       return;
