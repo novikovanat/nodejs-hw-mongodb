@@ -1,8 +1,6 @@
 import { model, Schema } from 'mongoose';
-import {
-  CONTACTS_TYPE,
-  emailRegex,
-} from '../../constants/contactConstants.js';
+import { CONTACTS_TYPE, emailRegex } from '../../constants/contactConstants.js';
+
 
 function validator(email) {
   return emailRegex.test(email);
@@ -34,6 +32,7 @@ const contactsSchema = new Schema(
       required: true,
       default: false,
     },
+    userId: { type: Schema.Types.ObjectId, ref: 'users', required: true, },
   },
   {
     timestamps: true,

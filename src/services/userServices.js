@@ -3,7 +3,7 @@ import { UsersCollection } from '../db/models/user.js';
 import bcrypt from 'bcrypt';
 import { SessionsCollection } from '../db/models/session.js';
 import { randomBytes } from 'crypto';
-import {FIFTEEN_MINUTES,ONE_DAY} from '../constants/studentConstants.js';
+import { THIRTY_DAYS, FIFTEEN_MINUTES } from '../constants/contactConstants.js';
 
 export const registerUser = async (payload) => {
   const user = await UsersCollection.findOne({ email: payload.email });
@@ -34,7 +34,7 @@ export const loginUser = async (payload) => {
     accessToken,
     refreshToken,
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
-    refreshTokenValidUntil: new Date(Date.now() + ONE_DAY)});
+    refreshTokenValidUntil: new Date(Date.now() + THIRTY_DAYS)});
 };
 
 
@@ -49,7 +49,7 @@ const createSession =()=>{
     accessToken,
     refreshToken,
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
-    refreshTokenValidUntil: new Date(Date.now() + ONE_DAY),
+    refreshTokenValidUntil: new Date(Date.now() + THIRTY_DAYS),
   };
 };
 

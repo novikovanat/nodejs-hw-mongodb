@@ -6,6 +6,6 @@ const router = Router();
 
 
 router.use('/auth', authRouter );
-router.use('/students',  contactsRouters);
+router.use('/contacts',  contactsRouters);
 
 export default router;
