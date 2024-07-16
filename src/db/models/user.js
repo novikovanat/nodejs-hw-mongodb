@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { emailRegex } from '../../constants/studentConstants.js';
+import { emailRegex } from '../../constants/contactConstants.js';
 
 function validator(email) {
   return emailRegex.test(email);

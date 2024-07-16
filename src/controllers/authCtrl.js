@@ -1,4 +1,4 @@
-import { ONE_DAY } from '../constants/studentConstants.js';
+import { THIRTY_DAYS } from '../constants/contactConstants.js';
 import {
   loginUser,
   logoutUser,
@@ -20,11 +20,11 @@ export const loginUserController = async (req, res) => {
   const session = await loginUser(req.body);
   res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
-    expires: new Date(Date.now() + ONE_DAY),
+    expires: new Date(Date.now() + THIRTY_DAYS),
   });
   res.cookie('sessionId', session._id, {
     httpOnly: true,
-    expires: new Date(Date.now() + ONE_DAY),
+    expires: new Date(Date.now() + THIRTY_DAYS),
   });
 
   res.json({
