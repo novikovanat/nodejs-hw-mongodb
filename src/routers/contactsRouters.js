@@ -13,13 +13,15 @@ import { validateBody } from '../middleware/validateBody.js';
 import { createContactSchema, updateContactSchema } from '../validation/contactsValidation.js';
 
 
-export const router = Router();
-router.get('/', ctrlWrapper(getContactsController));
+const contactsRouters = Router();
+contactsRouters.get('/', ctrlWrapper(getContactsController));
 
-router.get('/:contactId', isValidId, ctrlWrapper(getContactByIdController));
+contactsRouters.get('/:contactId', isValidId, ctrlWrapper(getContactByIdController));
 
-router.post('/', validateBody(createContactSchema), ctrlWrapper(createContactController));
+contactsRouters.post('/', validateBody(createContactSchema), ctrlWrapper(createContactController));
 
-router.patch('/:contactId',isValidId, validateBody(updateContactSchema), ctrlWrapper(updateContactController));
+contactsRouters.patch('/:contactId',isValidId, validateBody(updateContactSchema), ctrlWrapper(updateContactController));
 
-router.delete('/:contactId',ctrlWrapper(deleteContactController) );
+contactsRouters.delete('/:contactId',ctrlWrapper(deleteContactController) );
+
+export default contactsRouters;

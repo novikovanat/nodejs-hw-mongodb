@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import controllerWrapper from '../utils/controllerWrapper.js';
+import {ctrlWrapper} from '../utils/ctrlWrapper.js';
 import {
   loginUserSchema,
   registerUserSchema,
@@ -16,16 +16,16 @@ const authRouter = Router();
 authRouter.post(
   '/register',
   validateBody(registerUserSchema),
-  controllerWrapper(registerUserController),
+  ctrlWrapper(registerUserController),
 );
 authRouter.post(
   '/login',
   validateBody(loginUserSchema),
-  controllerWrapper(loginUserController),
+  ctrlWrapper(loginUserController),
 );
 
-authRouter.post('/logout', controllerWrapper(logoutUserController));
+authRouter.post('/logout', ctrlWrapper(logoutUserController));
 
-authRouter.post('/refresh', controllerWrapper(refreshUserSessionController));
+authRouter.post('/refresh', ctrlWrapper(refreshUserSessionController));
 
 export default authRouter;
