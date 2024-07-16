@@ -21,7 +21,7 @@ export const getAllContacts = async (
     contactsQuery.where('isFavourite').equals(filter.isFavourite);
   }
 
-  const contactsCount = await ContactsCollection.countDocuments();
+  const contactsCount = await ContactsCollection.countDocuments({ userId: userId });
   const contacts = await contactsQuery
     .skip(skip)
     .limit(limit)
