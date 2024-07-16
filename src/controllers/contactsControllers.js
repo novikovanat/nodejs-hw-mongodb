@@ -63,10 +63,10 @@ export const updateContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const {_id: userId} = req.user;
 
-  const result = await updateContact(contactId, req.body);
+  const result = await updateContact(userId, contactId, req.body);
 
   if (!result) {
-    next(createHttpError(404, 'Contact not found'));
+    next(createHttpError(404, 'That contact not in your list'));
     return;
   }
 
@@ -82,10 +82,10 @@ export const updateContactController = async (req, res, next) => {
 export const deleteContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const {_id: userId} = req.user;
-  const contact = await deleteContact(contactId);
+  const contact = await deleteContact(userId, contactId);
   
   if (!contact) {
-    next(createHttpError(404, 'Contact not found'));
+    next(createHttpError(404, 'That contact not in your list'));
     return;
   }
 
