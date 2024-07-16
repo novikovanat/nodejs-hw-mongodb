@@ -1,17 +1,23 @@
 import { ContactsCollection } from '../db/models/contact.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 
-export const getAllContacts = async (page, perPage,sortOrder, sortBy, filter) => {
+export const getAllContacts = async (
+  userId,
+  page,
+  perPage,
+  sortOrder,
+  sortBy,
+  filter,
+) => {
   const limit = perPage;
-  
-  const skip = (page - 1) * perPage;
-  
 
-  const contactsQuery = ContactsCollection.find();
-  if(filter.type){
+  const skip = (page - 1) * perPage;
+
+  const contactsQuery = ContactsCollection.find({ userId: userId });
+  if (filter.type) {
     contactsQuery.where('contactType').equals(filter.type);
-  };
-  if (filter.isFavourite !== undefined){
+  }
+  if (filter.isFavourite !== undefined) {
     contactsQuery.where('isFavourite').equals(filter.isFavourite);
   }
 
@@ -26,13 +32,19 @@ export const getAllContacts = async (page, perPage,sortOrder, sortBy, filter) =>
   return { contacts, ...paginationData };
 };
 
-export const getContactById = async (contactId) => {
-  const contact = await ContactsCollection.findById(contactId);
+export const getContactById = async (userId, contactId) => {
+  const contact = await ContactsCollection.findOne({
+    _id: contactId,
+    userId: userId,
+  });
   return contact;
 };
 
 export const createContact = async (payload, userId) => {
-  const contact = await ContactsCollection.create({...payload, 'userId': userId});
+  const contact = await ContactsCollection.create({
+    ...payload,
+    userId: userId,
+  });
   return contact;
 };
 
