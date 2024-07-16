@@ -3,8 +3,12 @@ import pino from 'pino-http';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { env } from './utils/env.js';
-import { router } from './routers/contactsRouters.js';
-import { serverErrorHandler, notFoundHandler } from './middleware/errorHandlers.js';
+import router from './routers/index.js';
+import {
+  notFoundHandler,
+  serverErrorHandler,
+} from './middleware/errorHandlers.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 const PORT = Number(env('PORT'));
@@ -21,10 +25,14 @@ export const setupServer = () => {
 
   app.use(express.json());
   app.use(cors());
+  app.use(cookieParser());
   app.use('/contacts', router);
+  
 
 
-  app.use('*', notFoundHandler );
+  app.use('/', router); // Додаємо роутер до app як middleware
+
+  app.use('*', notFoundHandler);
 
   app.use(serverErrorHandler);
 
