@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 export const SORT_ORDER_ARRAY = ['asc', 'desc'];
 export const FIRST_ENTRY = { page: 1, perPage: 1 };
 export const KEYS_OF_COLLECTION = [
@@ -27,3 +29,5 @@ export const SMTP = {
   SMTP_PASSWORD: 'SMTP_PASSWORD',
   SMTP_FROM: 'SMTP_FROM',
 };
+
+export const TEMPLATES_DIR = path.join(process.cwd(), 'src', 'templates');
