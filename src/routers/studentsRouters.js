@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import { upload } from '../middleware/multer.js';
+
 
 import {
   getStudentsController,
@@ -36,8 +38,9 @@ StudentsRouter.get(
 );
 StudentsRouter.post(
   '/',
-  validateBody(createStudentSchema),
   checkRoles(ROLES.TEACHER),
+  upload.single('photo'),
+  validateBody(createStudentSchema),
   controllerWrapper(createStudentController),
 );
 StudentsRouter.delete(
@@ -47,16 +50,18 @@ StudentsRouter.delete(
 );
 StudentsRouter.put(
   '/:studentId',
-  validateBody(updateStudentSchema),
   isValidId,
   checkRoles(ROLES.TEACHER),
+  upload.single('photo'),
+  validateBody(updateStudentSchema),
   controllerWrapper(upsertStudentController),
 );
 StudentsRouter.patch(
   '/:studentId',
-  checkRoles(ROLES.TEACHER),
-  validateBody(updateStudentSchema),
   isValidId,
+  checkRoles(ROLES.TEACHER),
+  upload.single('photo'),
+  validateBody(updateStudentSchema),
   controllerWrapper(patchStudentController),
 );
 export default StudentsRouter;
