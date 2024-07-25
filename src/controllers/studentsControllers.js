@@ -71,13 +71,23 @@ export const deleteStudentController = async (req, res, next) => {
 
 export const upsertStudentController = async (req, res, next) => {
   const { studentId } = req.params;
+  const { file: photo } = req;
+  
+
   const result = await updateStudent(studentId, req.body, {
     upsert: true,
   });
+   
   if (!result) {
     next(createHttpError(404, 'Student not found'));
     return;
   }
+  
+
+  if (photo) {
+    result.student.photo = await saveFileToUploadDir(photo);
+  }
+
   const status = result.isNew ? 201 : 200;
 
   res.status(status).json({
