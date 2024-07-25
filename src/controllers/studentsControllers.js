@@ -50,7 +50,17 @@ export const getStudentByIdController = async (req, res, next) => {
 };
 
 export const createStudentController = async (req, res) => {
-  const student = await createStudent(req.body);
+  const { file: photo } = req;
+  let photoUrl;
+
+  if (photo) {
+    photoUrl = await saveFileToUploadDir(photo);
+  }
+
+  const student = await createStudent({
+    ...req.body,
+    photo: photoUrl,
+  });
 
   res.status(201).json({
     status: 201,
@@ -72,21 +82,22 @@ export const deleteStudentController = async (req, res, next) => {
 export const upsertStudentController = async (req, res, next) => {
   const { studentId } = req.params;
   const { file: photo } = req;
-  
+  let photoUrl;
 
-  const result = await updateStudent(studentId, req.body, {
+  if (photo) {
+    photoUrl = await saveFileToUploadDir(photo);
+  }
+
+  const result = await updateStudent(studentId, {...req.body, photo:photoUrl}, {
     upsert: true,
   });
-   
+
   if (!result) {
     next(createHttpError(404, 'Student not found'));
     return;
   }
-  
 
-  if (photo) {
-    result.student.photo = await saveFileToUploadDir(photo);
-  }
+
 
   const status = result.isNew ? 201 : 200;
 
@@ -110,7 +121,7 @@ export const patchStudentController = async (req, res, next) => {
     ...req.body,
     photo: photoUrl,
   });
-  
+
   if (!result) {
     next(createHttpError(404, 'Student not found'));
     return;
