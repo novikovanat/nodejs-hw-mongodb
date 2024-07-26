@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import { upload } from '../middleware/multer.js';
+
 
 import {
   createContactController,
@@ -30,6 +32,7 @@ contactsRouters.get(
 
 contactsRouters.post(
   '/',
+  upload.single('photo'),
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );
@@ -37,6 +40,7 @@ contactsRouters.post(
 contactsRouters.patch(
   '/:contactId',
   isValidId,
+  upload.single('photo'),
   validateBody(updateContactSchema),
   ctrlWrapper(updateContactController),
 );

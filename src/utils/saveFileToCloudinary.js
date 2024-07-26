@@ -1,6 +1,6 @@
 import cloudinary from 'cloudinary';
 import { env } from './env.js';
-import { CLOUDINARY } from '../constants/studentConstants.js';
+import { CLOUDINARY } from '../constants/contactConstants.js';
 import fs from 'node:fs/promises';
 
 
