@@ -23,7 +23,7 @@ export const checkRoles =
     if (roles.includes(ROLES.PARENT) && role === ROLES.PARENT) {
       const { studentId } = req.params;
       if (!studentId) {
-        next(createHttpError(403));
+        next(createHttpError(403, 'Access denied'));
         return;
       }
 
@@ -38,5 +38,5 @@ export const checkRoles =
       }
     }
 
-    next(createHttpError(403));
+    next(createHttpError(403, "Nooo Access"));
   };

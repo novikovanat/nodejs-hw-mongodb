@@ -9,6 +9,7 @@ import {
   serverErrorHandler,
 } from './middleware/errorHandlers.js';
 import cookieParser from 'cookie-parser';
+import { UPLOAD_DIR } from './constants/studentConstants.js';
 
 dotenv.config();
 const PORT = Number(env('PORT'));
@@ -31,6 +32,7 @@ export const setupServer = () => {
 
 
   app.use('/', router); // Додаємо роутер до app як middleware
+  app.use('/uploads', express.static(UPLOAD_DIR));
 
   app.use('*', notFoundHandler);
 
