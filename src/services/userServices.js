@@ -6,7 +6,12 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 import { randomBytes } from 'crypto';
 import { SessionsCollection } from '../db/models/session.js';
-import { FIFTEEN_MINUTES, THIRTY_DAYS, SMTP, TEMPLATES_DIR } from '../constants/contactConstants.js';
+import {
+  FIFTEEN_MINUTES,
+  THIRTY_DAYS,
+  SMTP,
+  TEMPLATES_DIR,
+} from '../constants/contactConstants.js';
 import { UsersCollection } from '../db/models/user.js';
 import { env } from '../utils/env.js';
 import { sendEmail } from '../utils/sendMail.js';
@@ -40,7 +45,8 @@ export const loginUser = async (payload) => {
     accessToken,
     refreshToken,
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
-    refreshTokenValidUntil: new Date(Date.now() + THIRTY_DAYS)});
+    refreshTokenValidUntil: new Date(Date.now() + THIRTY_DAYS),
+  });
 };
 
 export const logoutUser = async (sessionId) => {
@@ -112,13 +118,19 @@ export const requestResetToken = async (email) => {
     link: `${env('APP_DOMAIN')}/reset-password?token=${resetToken}`,
   });
 
-
-  await sendEmail({
-    from: env(SMTP.SMTP_FROM),
-    to: email,
-    subject: 'Reset your password',
-    html: html
-  });
+  try {
+    await sendEmail({
+      from: env(SMTP.SMTP_FROM),
+      to: email,
+      subject: 'Reset your password',
+      html: html,
+    });
+  } catch {
+    throw createHttpError(
+      500,
+      'Failed to send the email, please try again later.',
+    );
+  }
 };
 
 export const resetPassword = async (payload) => {
@@ -127,7 +139,8 @@ export const resetPassword = async (payload) => {
   try {
     entries = jwt.verify(payload.token, env('JWT_SECRET'));
   } catch (err) {
-    if (err instanceof Error) throw createHttpError(401, "Token is expired or invalid");
+    if (err instanceof Error)
+      throw createHttpError(401, 'Token is expired or invalid');
     throw err;
   }
 
