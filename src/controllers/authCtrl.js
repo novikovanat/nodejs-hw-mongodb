@@ -5,9 +5,8 @@ import {
   refreshUserSession,
   registerUser,
   requestResetToken,
-  resetPassword
+  resetPassword,
 } from '../services/userServices.js';
-
 
 export const registerUserController = async (req, res) => {
   const user = await registerUser(req.body);
@@ -81,7 +80,7 @@ export const refreshUserSessionController = async (req, res) => {
 export const requestResetPasswordByEmailController = async (req, res) => {
   await requestResetToken(req.body.email);
   res.json({
-    message: 'Reset password email was successfully sent!',
+    message: 'Reset password email has been successfully sent.',
     status: 200,
     data: {},
   });
@@ -90,7 +89,7 @@ export const requestResetPasswordByEmailController = async (req, res) => {
 export const resetPasswordController = async (req, res) => {
   await resetPassword(req.body);
   res.json({
-    message: 'Password was successfully reset!',
+    message: 'Password has been successfully reset.',
     status: 200,
     data: {},
   });
