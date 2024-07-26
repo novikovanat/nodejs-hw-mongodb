@@ -9,7 +9,7 @@ import {
   serverErrorHandler,
 } from './middleware/errorHandlers.js';
 import cookieParser from 'cookie-parser';
-import { UPLOAD_DIR } from './constants/studentConstants.js';
+import { UPLOAD_DIR } from './constants/contactConstants.js';
 
 dotenv.config();
 const PORT = Number(env('PORT'));
