@@ -2,12 +2,15 @@ import { Router } from 'express';
 import controllerWrapper from '../utils/controllerWrapper.js';
 import {
   loginUserSchema,
+  loginWithGoogleOAuthSchema,
   registerUserSchema,
   requestResetEmailSchema as requestResetPasswordByEmailSchema,
   resetPasswordSchema,
 } from '../validation/authValidation.js';
 import {
+  getGoogleOAuthUrlController,
   loginUserController,
+  loginWithGoogleController,
   logoutUserController,
   refreshUserSessionController,
   registerUserController,
@@ -26,6 +29,13 @@ authRouter.post(
   '/login',
   validateBody(loginUserSchema),
   controllerWrapper(loginUserController),
+);
+authRouter.get('/get-oauth-url', controllerWrapper(getGoogleOAuthUrlController));
+
+authRouter.post(
+  '/confirm-oauth',
+  validateBody(loginWithGoogleOAuthSchema),
+  controllerWrapper(loginWithGoogleController),
 );
 
 authRouter.post('/logout', controllerWrapper(logoutUserController));
