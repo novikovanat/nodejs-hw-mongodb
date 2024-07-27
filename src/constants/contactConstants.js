@@ -2,6 +2,7 @@ import path from 'node:path';
 export const emailRegex =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 export const phoneNumberRegex = /^[+]?[1-9]\d{1,14}$/;
+export const regexPhoneMessage = 'Here are some example phone numbers : 12345, +123456789012345, +9876543210, 234567, +2345678901234';
 export const CONTACTS_TYPE = ['personal', 'work', 'home'];
 export const DEFAULT_CONTACTS_TYPE = 'personal';
 export const SORT_ORDER_ARRAY = ['asc', 'desc'];
