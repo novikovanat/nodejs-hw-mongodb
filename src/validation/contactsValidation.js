@@ -7,7 +7,7 @@ import {
 
 export const createContactSchema = Joi.object({
   name: Joi.string().min(3).max(30).required(),
-  phoneNumber: Joi.string().pattern(phoneNumberRegex).required(),
+  phoneNumber: Joi.string().pattern(phoneNumberRegex).message('Here are some example phone numbers : 12345, +123456789012345, +9876543210, 234567, +2345678901234').required(),
   email: Joi.string().email().allow(null).default(null),
   contactType: Joi.string()
     .valid(...CONTACTS_TYPE)
