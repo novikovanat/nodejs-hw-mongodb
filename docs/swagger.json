@@ -406,7 +406,7 @@
                     "example": "65e4decdd286b30065d54af9"
                   },
                   "photo": {
-                    "description": "Contacts's photo",
+                    "description": "Contact's photo",
                     "type": "string",
                     "format": "binary"
                   }
