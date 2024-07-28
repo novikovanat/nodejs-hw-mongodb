@@ -40,6 +40,9 @@ export const CLOUDINARY = {
   API_SECRET: 'API_SECRET',
 };
 
+export const SWAGGER_PATH = path.resolve('docs', 'swagger.json');
+
+
 export const TEMPLATES_DIR = path.join(process.cwd(), 'src', 'templates');
 
 export const TEMP_UPLOAD_DIR = path.join(process.cwd(), 'temp');
