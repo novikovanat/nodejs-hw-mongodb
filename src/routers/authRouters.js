@@ -30,12 +30,12 @@ authRouter.post(
   validateBody(loginUserSchema),
   ctrlWrapper(loginUserController),
 );
-authRouter.get('/get-oauth-url', controllerWrapper(getGoogleOAuthUrlController));
+authRouter.get('/get-oauth-url', ctrlWrapper(getGoogleOAuthUrlController));
 
 authRouter.post(
   '/confirm-oauth',
   validateBody(loginWithGoogleOAuthSchema),
-  controllerWrapper(loginWithGoogleController),
+  ctrlWrapper(loginWithGoogleController),
 );
 
 authRouter.post('/logout', ctrlWrapper(logoutUserController));
