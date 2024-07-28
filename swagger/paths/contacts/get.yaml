@@ -1,7 +1,7 @@
 
 tags:
-  - Students
-summary: Get list of students
+  - Contacts
+summary: Get list of contacts
 operationId: getContacts
 description: 'Get list of contacts with this endpoint'
 security:
