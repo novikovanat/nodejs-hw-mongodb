@@ -211,7 +211,7 @@
                   "email": {
                     "description": "Contact's email",
                     "type": "string",
-                    "example": "kovalenko@example.com"
+                    "example": "doe@example.com"
                   },
                   "contactType": {
                     "description": "Type of contact",
