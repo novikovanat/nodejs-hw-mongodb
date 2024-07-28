@@ -265,7 +265,8 @@
                       "example": "Successfully created a student!"
                     },
                     "data": {
-                      "type": "object"
+                      "type": "object",
+                      "$ref": "#/components/schemas/contact"
                     }
                   }
                 }
@@ -426,7 +427,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Delete a contact"
+            "description": "No content"
           },
           "401": {
             "$ref": "#/components/responses/401"
