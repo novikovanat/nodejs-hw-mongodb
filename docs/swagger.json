@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
-    "title": "Students app",
+    "title": "Contacts web servise",
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
@@ -13,13 +13,13 @@
       "url": "http://localhost:3000"
     },
     {
-      "url": "https://example.com/api/v1"
+      "url": "https://nodejs-hw-mongodb-1-fa7k.onrender.com"
     }
   ],
   "tags": [
     {
-      "name": "Students",
-      "description": "Operations about users."
+      "name": "Contacts",
+      "description": "Operations with contacts."
     },
     {
       "name": "Auth",
@@ -30,11 +30,11 @@
     "/students": {
       "get": {
         "tags": [
-          "Students"
+          "Contacts"
         ],
-        "summary": "Get list of students",
-        "operationId": "getStudents",
-        "description": "Get list of users with this endpoint",
+        "summary": "Get list of contacts",
+        "operationId": "getContacts",
+        "description": "Get list of contacts with this endpoint",
         "security": [
           {
             "bearerAuth": []
@@ -62,9 +62,9 @@
             "name": "sortBy",
             "schema": {
               "type": "string",
-              "example": "age"
+              "example": "name"
             },
-            "description": "All student's fields can be mentioned. Default value - _id"
+            "description": "All contact's fields can be mentioned. Default value - _id"
           },
           {
             "in": "query",
@@ -80,53 +80,30 @@
           },
           {
             "in": "query",
-            "name": "minAvgMark",
-            "schema": {
-              "type": "number",
-              "example": 4
-            }
-          },
-          {
-            "in": "query",
-            "name": "maxAvgMark",
-            "schema": {
-              "type": "number",
-              "example": 10
-            }
-          },
-          {
-            "in": "query",
-            "name": "minAge",
-            "schema": {
-              "type": "number",
-              "example": 10
-            }
-          },
-          {
-            "in": "query",
-            "name": "maxAge",
-            "schema": {
-              "type": "number",
-              "example": 16
-            }
-          },
-          {
-            "in": "query",
-            "name": "gender",
+            "name": "type",
             "schema": {
               "type": "string",
               "enum": [
-                "male",
-                "female",
-                "other"
+                "personal",
+                "work",
+                "home"
               ],
-              "example": "male"
+              "example": "personal"
+            },
+            "description": "Default value - personal"
+          },
+          {
+            "in": "query",
+            "name": "isFavourite",
+            "schema": {
+              "type": "boolean",
+              "example": false
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully found students!",
+            "description": "Successfully found contacts!",
             "content": {
               "application/json": {
                 "schema": {
@@ -143,7 +120,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Successfully found students!"
+                      "example": "Success!"
                     },
                     "data": {
                       "type": "object",
@@ -160,7 +137,7 @@
                         "data": {
                           "type": "array",
                           "items": {
-                            "$ref": "#/components/schemas/student"
+                            "$ref": "#/components/schemas/contact"
                           }
                         },
                         "page": {
@@ -201,11 +178,11 @@
       },
       "post": {
         "tags": [
-          "Students"
+          "Contacts"
         ],
-        "summary": "Create student",
-        "operationId": "createStudent",
-        "description": "Create a student with payload",
+        "summary": "Create new contact",
+        "operationId": "createContact",
+        "description": "Create a contact with payload",
         "security": [
           {
             "bearerAuth": []
@@ -218,48 +195,46 @@
                 "type": "object",
                 "required": [
                   "name",
-                  "age",
-                  "gender",
-                  "avgMark",
-                  "parentId"
+                  "phoneNumber"
                 ],
                 "properties": {
                   "name": {
-                    "description": "Student's name",
+                    "description": "Contact's name",
                     "type": "string",
                     "example": "John Doe"
                   },
-                  "age": {
-                    "description": "Student's age",
+                  "phoneNumber": {
+                    "description": "Contact's phone number",
                     "type": "number",
-                    "example": 12
+                    "example": 380000000006
                   },
-                  "gender": {
-                    "description": "Student's age",
+                  "email": {
+                    "description": "Contact's email",
+                    "type": "string",
+                    "example": "kovalenko@example.com"
+                  },
+                  "contactType": {
+                    "description": "Type of contact",
                     "type": "string",
                     "enum": [
-                      "male",
-                      "female",
-                      "other"
-                    ]
+                      "personal",
+                      "work",
+                      "home"
+                    ],
+                    "example": "personal"
                   },
-                  "avgMark": {
-                    "description": "Student's average mark. Should be between 1 and 12",
-                    "type": "number",
-                    "example": 9.7
-                  },
-                  "onDuty": {
-                    "description": "Whether is student on duty",
+                  "isFavourite": {
+                    "description": "Is contact favoririte",
                     "type": "boolean",
                     "example": false
                   },
-                  "parentId": {
-                    "description": "Student's parent id",
+                  "userId": {
+                    "description": "Id of user who add contact",
                     "type": "string",
                     "example": "65e4decdd286b30065d54af9"
                   },
                   "photo": {
-                    "description": "Student''s photo",
+                    "description": "Contacts's photo",
                     "type": "string",
                     "format": "binary"
                   }
@@ -270,7 +245,7 @@
         },
         "responses": {
           "201": {
-            "description": "Creates a student",
+            "description": "Creates a contact",
             "content": {
               "application/json": {
                 "schema": {
@@ -306,11 +281,11 @@
     "/students/{id}": {
       "get": {
         "tags": [
-          "Students"
+          "Contacts"
         ],
-        "summary": "Get student by id",
-        "operationId": "getStudent",
-        "description": "Get student by id",
+        "summary": "Get contact by id",
+        "operationId": "getContact",
+        "description": "Get contact by id",
         "security": [
           {
             "bearerAuth": []
@@ -329,7 +304,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get student by id",
+            "description": "Get Contact by id",
             "content": {
               "application/json": {
                 "schema": {
@@ -337,7 +312,7 @@
                   "required": [
                     "status",
                     "message",
-                    "data"
+                    "contact"
                   ],
                   "properties": {
                     "status": {
@@ -348,9 +323,9 @@
                       "type": "string",
                       "example": "Successfully found student with id 65ca67e7ae7f10c88b598384!"
                     },
-                    "data": {
+                    "contact": {
                       "type": "object",
-                      "$ref": "#/components/schemas/student"
+                      "$ref": "#/components/schemas/contact"
                     }
                   }
                 }
@@ -372,58 +347,61 @@
       }
     },
     "schemas": {
-      "student": {
+      "contact": {
         "type": "object",
         "required": [
           "_id",
           "name",
-          "age",
-          "gender",
-          "avgMark",
-          "onDuty"
+          "phoneNumber",
+          "contactType",
+          "isFavourite",
+          "userId",
+          "createdAt",
+          "updatedAt"
         ],
         "properties": {
           "_id": {
-            "description": "Student's id",
+            "description": "Contacts's id",
             "type": "string",
             "example": "65e4decdd286b30065d54af9"
           },
           "name": {
-            "description": "Student's name",
+            "description": "Contacts's name",
             "type": "string",
             "example": "John Doe"
           },
-          "age": {
-            "description": "Student's age",
+          "phoneNumber": {
+            "description": "Contact's phone number",
             "type": "number",
-            "example": 12
+            "example": 127685247
           },
-          "gender": {
-            "description": "Student's age",
+          "contactType": {
+            "description": "Type of contact",
             "type": "string",
             "enum": [
-              "male",
-              "female",
-              "other"
-            ]
+              "personal",
+              "work",
+              "home"
+            ],
+            "example": "work"
           },
-          "avgMark": {
-            "description": "Student's average mark. Should be between 1 and 12",
-            "type": "number",
-            "example": 9.7
-          },
-          "onDuty": {
-            "description": "Whether is student on duty",
+          "isFavourite": {
+            "description": "Marks is contact added to favorite list",
             "type": "boolean",
             "example": false
           },
-          "parentId": {
-            "description": "Student's parent id",
+          "email": {
+            "description": "Contact's email",
+            "type": "string",
+            "example": "contact@example.com"
+          },
+          "UserId": {
+            "description": "Id of user who added contact",
             "type": "string",
             "example": "65e4decdd286b30065d54af9"
           },
           "photo": {
-            "description": "Link to student's photo",
+            "description": "Link to contacts's photo",
             "type": "string",
             "example": "<https://res.cloudinary.com/uqwgdu/image/upload/image.png>"
           }
