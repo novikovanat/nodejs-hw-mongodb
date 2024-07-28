@@ -14,6 +14,7 @@ export const createContactSchema = Joi.object({
     .valid(...CONTACTS_TYPE)
     .default(DEFAULT_CONTACTS_TYPE),
   isFavourite: Joi.boolean().default(false),
+  photo: Joi.string()
 });
 
 export const updateContactSchema = Joi.object({
@@ -24,4 +25,5 @@ export const updateContactSchema = Joi.object({
     .valid(...CONTACTS_TYPE)
     .default(DEFAULT_CONTACTS_TYPE),
   isFavourite: Joi.boolean().default(false),
+  photo: Joi.string()
 });
