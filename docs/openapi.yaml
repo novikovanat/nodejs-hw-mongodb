@@ -1,12 +1,10 @@
-openapi: 3.1.1
+openapi: 3.1.0
 info:
   version: 1.0.0
   title: Students app
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  description: 
-    This is a documentation of students app
 tags:
   - name: Students
     description: Operations about users.
@@ -18,12 +16,12 @@ servers:
 paths:
   /students:
     get:
-      $ref: ../docs/swagger/paths/students/get.yaml
+      $ref: ../swagger/paths/students/get.yaml
     post:
-      $ref: ../docs/swagger/paths/students/post.yaml
+      $ref: ../swagger/paths/students/post.yaml
   /students/{id}:
     get:
-      $ref: ../docs/swagger/paths/students/{id}/get.yaml
+      $ref: ../swagger/paths/students/{id}/get.yaml
 components:
   securitySchemes:
     bearerAuth:

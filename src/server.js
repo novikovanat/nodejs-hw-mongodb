@@ -10,7 +10,7 @@ import {
 } from './middleware/errorHandlers.js';
 import cookieParser from 'cookie-parser';
 import { UPLOAD_DIR } from './constants/studentConstants.js';
-import { swaggerDocs } from './middleware/swaggerDocs.js';
+import  swaggerDocs from './middleware/swaggerDocs.js';
 
 dotenv.config();
 const PORT = Number(env('PORT'));
