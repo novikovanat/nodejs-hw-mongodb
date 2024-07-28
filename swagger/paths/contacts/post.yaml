@@ -35,10 +35,6 @@ requestBody:
             description: 'Is contact favoririte'
             type: boolean
             example: false
-          userId:
-            description: "Id of user who add contact"
-            type: string
-            example: 65e4decdd286b30065d54af9
           photo:
             description: "Contacts's photo"
             type: string
