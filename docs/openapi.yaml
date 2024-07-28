@@ -1,22 +1,22 @@
 openapi: 3.1.0
 info:
   version: 1.0.0
-  title: Students app
+  title: Contacts web servise
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 tags:
-  - name: Students
-    description: Operations about users.
+  - name: Contacts
+    description: Operations with contacts.
   - name: Auth
     description: Auth operations.
 servers:
   - url: http://localhost:3000
-  - url: https://example.com/api/v1
+  - url: https://nodejs-hw-mongodb-1-fa7k.onrender.com
 paths:
   /students:
     get:
-      $ref: '../swagger/paths/students/get.yaml'
+      $ref: '../swagger/paths/contacts/get.yaml'
     post:
       $ref: '../swagger/paths/students/post.yaml'
   /students/{id}:
