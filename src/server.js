@@ -10,6 +10,7 @@ import {
 } from './middleware/errorHandlers.js';
 import cookieParser from 'cookie-parser';
 import { UPLOAD_DIR } from './constants/studentConstants.js';
+import { swaggerDocs } from './middleware/swaggerDocs.js';
 
 dotenv.config();
 const PORT = Number(env('PORT'));
@@ -36,6 +37,7 @@ export const startServer = () => {
 
   app.use('/', router); // Додаємо роутер до app як middleware
   app.use('/uploads', express.static(UPLOAD_DIR));
+  app.use('/api-docs', swaggerDocs());
 
   app.use('*', notFoundHandler);
 
@@ -44,4 +46,6 @@ export const startServer = () => {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
+
+  
 };
