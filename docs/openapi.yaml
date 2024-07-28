@@ -16,12 +16,12 @@ servers:
 paths:
   /students:
     get:
-      $ref: ../swagger/paths/students/get.yaml
+      $ref: '../swagger/paths/students/get.yaml'
     post:
-      $ref: ../swagger/paths/students/post.yaml
+      $ref: '../swagger/paths/students/post.yaml'
   /students/{id}:
     get:
-      $ref: ../swagger/paths/students/{id}/get.yaml
+      $ref: '../swagger/paths/students/{id}/get.yaml'
 components:
   securitySchemes:
     bearerAuth:

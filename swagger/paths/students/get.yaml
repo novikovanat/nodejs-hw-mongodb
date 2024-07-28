@@ -86,8 +86,8 @@ responses:
               properties:
                 data:
                   type: array
-                  # items:
-                  #   $ref: '../../components/schemas/student.yaml'
+                  items:
+                    $ref: '../../components/schemas/student.yaml'
                 page:
                   type: number
                   example: 2

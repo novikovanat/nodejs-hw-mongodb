@@ -17,4 +17,4 @@ import { SWAGGER_PATH } from '../constants/studentConstants.js';
   }
 };
 
-export default swaggerDocs
+export default swaggerDocs;
