@@ -1,6 +1,6 @@
 import { HttpError } from 'http-errors';
 
-export const serverErrorHandler = (error, req, res, next) => {
+export const serverErrorHandler = (error, req, res) => {
   if (error instanceof HttpError) {
     const { status, message } = error;
     res.status(status).json({
@@ -18,7 +18,7 @@ export const serverErrorHandler = (error, req, res, next) => {
   });
 };
 
-export const notFoundHandler = (req, res, next) => {
+export const notFoundHandler = (req, res) => {
   res.status(404).json({
     status: 404,
     message: 'Page not found',
