@@ -29,9 +29,28 @@ paths:
   /auth/register:
     post:
       $ref: '../swagger/paths/auth/post/register.yaml'
+  /auth/login:
+    post: 
+      $ref: '../swagger/paths/auth/post/login.yaml'
   /auth/get-oauth-url:
     get:
      $ref: '../swagger/paths/auth/get/get-oauth-url.yaml'
+  /auth/confirm-oauth:
+    post:
+      $ref: '../swagger/paths/auth/post/confirm-oauth.yaml'
+  /auth/refresh:
+    post: 
+      $ref: '../swagger/paths/auth/post/refresh.yaml'
+  /auth/lsend-reset-email:
+    post: 
+      $ref: '../swagger/paths/auth/post/send-reset-email.yaml'
+  /auth/reset-pwd:
+    post: 
+      $ref: '../swagger/paths/auth/post/reset-pwd.yaml'
+  /auth/logout:
+    post:
+      $ref: '../swagger/paths/auth/post/logout.yaml'
+    
 
 components:
   securitySchemes:
