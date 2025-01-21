@@ -749,9 +749,6 @@
                       "type": "string",
                       "description": "Access token for authenticated user",
                       "example": "YBDTZRgpgFARbz3TetV4ZNylDdgPGYj4dSM8Rbuy"
-                    },
-                    "user": {
-                      "$ref": "#/components/schemas/user"
                     }
                   }
                 }
@@ -1131,7 +1128,7 @@
     "/auth/logout": {
       "post": {
         "tags": [
-          "User"
+          "Auth"
         ],
         "summary": "Logout a user",
         "operationId": "logoutUser",

@@ -27,8 +27,7 @@ responses:
               type: string
               description: 'Access token for authenticated user'
               example: 'YBDTZRgpgFARbz3TetV4ZNylDdgPGYj4dSM8Rbuy'
-            user:
-              $ref: '../../../components/schemas/user.yaml'
+           
 
   '401':
     description: 'Unauthorized. Invalid or missing authentication token.'
